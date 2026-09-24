@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="RecipeManagement.Application/RecipeManagement.Application.csproj" />
-  <Project Path="RecipeManagement.Core/RecipeManagement.Core.csproj" />
-  <Project Path="RecipeManagement.Tests/RecipeManagement.Tests.csproj" />
-</Solution>
