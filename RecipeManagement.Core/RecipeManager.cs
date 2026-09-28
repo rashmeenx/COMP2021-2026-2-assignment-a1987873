@@ -81,7 +81,7 @@ public sealed class RecipeManager : IRecipeManager
         {
             return false;
         }
-        if (!_cookingPlan.Contains(recipeId))
+        if (_cookingPlan.Contains(recipeId))
         {
             return false;
         }
