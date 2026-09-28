@@ -17,11 +17,26 @@ public sealed class RecipeManager : IRecipeManager
     private readonly Stack<int> _removedRecipeHistory = new();
     private readonly Queue<string> _instructionQueue = new();
 
-    
+
     public RecipeManager(IEnumerable<Recipe> recipes)
     {
         // TODO Part A: validate recipes and build Dictionary<int, Recipe>.
-        _ = recipes;
+        ArgumentNullException.ThrowIfNull(recipes);
+
+        foreach (Recipe recipe in recipes)
+        {
+            if (recipe is null ||
+                recipe.Id <= 0 ||
+                string.IsNullOrWhiteSpace(recipe.Title) ||
+                _recipes.ContainsKey(recipe.Id))
+            {
+                throw new ArgumentException(
+                    "Every recipe must have a positive unique ID and a non-blank title.",
+                    nameof(recipes));
+            }
+
+            _recipes.Add(recipe.Id, recipe);
+        }
     }
 
     public int RecipeCount => 0;
