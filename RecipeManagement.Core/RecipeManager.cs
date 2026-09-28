@@ -187,19 +187,59 @@ public sealed class RecipeManager : IRecipeManager
 
         return _removedRecipeHistory.Peek();
     }
-    
-    public IReadOnlyList<int> GetCookingPlan() =>
-        throw new NotImplementedException("Part A: implement GetCookingPlan.");
 
-    public bool StartCooking(int recipeId) =>
-        throw new NotImplementedException("Part A: implement StartCooking.");
+    // Return a copy of the cooking plan in linked-list order.
+    public IReadOnlyList<int> GetCookingPlan()
+    {
+        return new List<int>(_cookingPlan);
+    }
 
-    public string? PeekNextInstruction() =>
-        throw new NotImplementedException("Part A: implement PeekNextInstruction.");
+    // Implemented loading the selected recipe's instructions into the queue.
+    public bool StartCooking(int recipeId)
+    {
+        if (!_recipes.TryGetValue(recipeId, out Recipe? recipe))
+        {
+            return false;
+        }
 
-    public string? CompleteNextInstruction() =>
-        throw new NotImplementedException("Part A: implement CompleteNextInstruction.");
+        if (recipe.Instructions.Count == 0)
+        {
+            return false;
+        }
 
+        _instructionQueue.Clear();
+
+        foreach (string instruction in recipe.Instructions)
+        {
+            _instructionQueue.Enqueue(instruction);
+        }
+
+        return true;
+    }
+
+    // Implemented queue peek without removing the instruction.
+    public string? PeekNextInstruction()
+    {
+        if (_instructionQueue.Count == 0)
+        {
+            return null;
+        }
+
+        return _instructionQueue.Peek();
+    }
+
+    // Implemented removing and returning the next queued instruction.
+    public string? CompleteNextInstruction()
+    {
+        if (_instructionQueue.Count == 0)
+        {
+            return null;
+        }
+
+        return _instructionQueue.Dequeue();
+    }
+
+    // Part B.
     public IReadOnlyList<Recipe> SearchByTitle(string searchText) =>
         throw new NotImplementedException("Part B: implement SearchByTitle.");
 
