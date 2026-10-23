@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RecipeManagement.Core;
 
 /// <summary>
-/// Implement this class using the five Part A collections as private fields:
-/// Dictionary&lt;int, Recipe&gt;, List&lt;string&gt;, LinkedList&lt;int&gt;,
-/// Stack&lt;int&gt; and Queue&lt;string&gt;.
+/// Manages the recipe catalogue, shopping list, cooking plan, removed-recipe history and cooking instruction queue.
 /// </summary>
 public sealed class RecipeManager : IRecipeManager
 {
-    // TODO Part A: add your private collection fields here.
+    // Private collection fields.
     private readonly Dictionary<int, Recipe> _recipes = new();
     private readonly List<string> _shoppingList = new();
     private readonly LinkedList<int> _cookingPlan = new();
@@ -20,7 +19,7 @@ public sealed class RecipeManager : IRecipeManager
 
     public RecipeManager(IEnumerable<Recipe> recipes)
     {
-        // TODO Part A: validate recipes and build Dictionary<int, Recipe>.
+        // Validated recipes and build Dictionary<int, Recipe>.
         ArgumentNullException.ThrowIfNull(recipes);
 
         foreach (Recipe recipe in recipes)
@@ -81,13 +80,13 @@ public sealed class RecipeManager : IRecipeManager
         {
             return false;
         }
+
         if (_cookingPlan.Contains(recipeId))
         {
             return false;
         }
 
         return _recipes.Remove(recipeId);
-
     }
 
     // Implemented copying a recipe's ingredients into the shopping list.
@@ -240,8 +239,14 @@ public sealed class RecipeManager : IRecipeManager
     }
 
     // Part B.
-    public IReadOnlyList<Recipe> SearchByTitle(string searchText) =>
-        throw new NotImplementedException("Part B: implement SearchByTitle.");
+    //  Searches recipe titles for a partial match using LINQ.
+    public IReadOnlyList<Recipe> SearchByTitle(string searchText)
+    {
+        string search = searchText?.Trim() ?? string.Empty;
+
+        return _recipes.Values
+            .Where(recipe => recipe.Title.ToLower().Contains(search.ToLower())).ToList();
+    }
 
     public IReadOnlyList<Recipe> SearchByIngredient(string searchText) =>
         throw new NotImplementedException("Part B: implement SearchByIngredient.");
