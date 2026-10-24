@@ -248,9 +248,15 @@ public sealed class RecipeManager : IRecipeManager
             .Where(recipe => recipe.Title.ToLower().Contains(search.ToLower())).ToList();
     }
 
-    public IReadOnlyList<Recipe> SearchByIngredient(string searchText) =>
-        throw new NotImplementedException("Part B: implement SearchByIngredient.");
+    // Searches recipe case-insensitive ingredients using LINQ.
+    public IReadOnlyList<Recipe> SearchByIngredient(string searchText)
+    {
+        string search = searchText?.Trim() ?? string.Empty;
 
+        return _recipes.Values
+            .Where(recipe => recipe.Ingredients.Any(ingredient => ingredient.ToLower().Contains(search.ToLower()))).ToList();
+    }
+    
     public IReadOnlyList<Recipe> GetHighestProteinRecipes(int count) =>
         throw new NotImplementedException("Part B: implement GetHighestProteinRecipes.");
 
