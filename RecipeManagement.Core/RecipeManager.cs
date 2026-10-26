@@ -300,6 +300,9 @@ public sealed class RecipeManager : IRecipeManager
     }
 
 
-    public IReadOnlyList<int> GetSavedRecipes() =>
-        throw new NotImplementedException("Part B: implement GetSavedRecipes.");
+    // Returns a list of all saved recipe IDs
+    public IReadOnlyList<int> GetSavedRecipes()
+    {
+        return _savedRecipes.ToList();
+    }
 }
