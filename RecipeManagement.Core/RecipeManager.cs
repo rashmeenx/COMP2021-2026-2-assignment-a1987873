@@ -256,9 +256,23 @@ public sealed class RecipeManager : IRecipeManager
         return _recipes.Values
             .Where(recipe => recipe.Ingredients.Any(ingredient => ingredient.ToLower().Contains(search.ToLower()))).ToList();
     }
-    
-    public IReadOnlyList<Recipe> GetHighestProteinRecipes(int count) =>
-        throw new NotImplementedException("Part B: implement GetHighestProteinRecipes.");
+
+    // Returns the requested number of recipes sorted by protein content from highest to lowest
+    public IReadOnlyList<Recipe> GetHighestProteinRecipes(int count)
+    {
+        if (count <= 0)
+        {
+            return new List<Recipe>();
+        }
+
+        return _recipes.Values
+            .Where(recipe =>
+                recipe.Nutrition?.ProteinG.HasValue == true)
+            .OrderByDescending(recipe =>
+                recipe.Nutrition!.ProteinG!.Value)
+            .Take(count)
+            .ToList();
+    }
 
     public bool AddSavedRecipe(int recipeId) =>
         throw new NotImplementedException("Part B: implement AddSavedRecipe.");
