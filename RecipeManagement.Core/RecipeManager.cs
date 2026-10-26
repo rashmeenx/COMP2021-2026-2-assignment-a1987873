@@ -16,6 +16,8 @@ public sealed class RecipeManager : IRecipeManager
     private readonly Stack<int> _removedRecipeHistory = new();
     private readonly Queue<string> _instructionQueue = new();
 
+    // Stores unique IDs of saved recipes.
+    private readonly HashSet<int> _savedRecipes = new();
 
     public RecipeManager(IEnumerable<Recipe> recipes)
     {
@@ -274,8 +276,16 @@ public sealed class RecipeManager : IRecipeManager
             .ToList();
     }
 
-    public bool AddSavedRecipe(int recipeId) =>
-        throw new NotImplementedException("Part B: implement AddSavedRecipe.");
+    // Adds a recipe to saved recipes if it exists and is not already saved
+    public bool AddSavedRecipe(int recipeId)
+    {
+        if (!_recipes.ContainsKey(recipeId))
+        {
+            return false;
+        }
+
+        return _savedRecipes.Add(recipeId);
+    }
 
     public bool RemoveSavedRecipe(int recipeId) =>
         throw new NotImplementedException("Part B: implement RemoveSavedRecipe.");
