@@ -230,4 +230,17 @@ public sealed class RecipeManagerPartBTests
         Assert.False(
             manager.IsRecipeSaved(999));
     }
+
+    [Fact]
+    public void SavedRecipe_CanBeRemoved()
+    {
+        var manager = CreateManager();
+
+        manager.AddSavedRecipe(10);
+
+        bool removed = manager.RemoveSavedRecipe(10);
+        
+        Assert.True(removed);
+        Assert.False(manager.IsRecipeSaved(10));
+    }
 }
