@@ -217,4 +217,17 @@ public sealed class RecipeManagerPartBTests
         Assert.Single(
             manager.GetSavedRecipes());
     }
+
+    [Fact]
+    public void SavedRecipe_MissingRecipeCannotBeAdded()
+    {
+        var manager = CreateManager();
+
+        bool added =
+            manager.AddSavedRecipe(999);
+
+        Assert.False(added);
+        Assert.False(
+            manager.IsRecipeSaved(999));
+    }
 }
