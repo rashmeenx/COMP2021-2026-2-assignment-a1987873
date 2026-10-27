@@ -176,5 +176,16 @@ public sealed class RecipeManagerPartBTests
             recipe => recipe.Id == 40);
     }
 
+    public void HighestProteinRecipes_ReturnsEmptyForZeroOrNegativeCount()
+    {
+        var manager = CreateManager();
+
+        Assert.Empty(
+            manager.GetHighestProteinRecipes(0));
+
+        Assert.Empty(
+            manager.GetHighestProteinRecipes(-1));
+    }
+
 
 }
