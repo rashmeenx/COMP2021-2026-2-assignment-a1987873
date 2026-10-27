@@ -253,4 +253,23 @@ public sealed class RecipeManagerPartBTests
 
         Assert.False(removed);
     }
+
+    [Fact]
+    public void PartBFeatures_WorkingWithExistingRecipeManager()
+    {
+        var manager = CreateManager();
+
+        IReadOnlyList<Recipe> results = manager.SearchByTitle("chicken");
+
+        Assert.Single(results);
+
+        int recipeId = results[0].Id;
+
+        Assert.True(manager.AddRecipeToCookingPlan(recipeId));
+        Assert.True(manager.AddSavedRecipe(recipeId));
+        Assert.True(manager.IsRecipeSaved(recipeId));
+        Assert.True(manager.RemoveSavedRecipe(recipeId));
+        Assert.False(manager.IsRecipeSaved(recipeId));
+        Assert.Contains(recipeId, manager.GetCookingPlan());
+    }
 }
