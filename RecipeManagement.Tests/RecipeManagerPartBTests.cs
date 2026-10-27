@@ -243,4 +243,14 @@ public sealed class RecipeManagerPartBTests
         Assert.True(removed);
         Assert.False(manager.IsRecipeSaved(10));
     }
+
+    [Fact]
+    public void RemovingRecipeThatIsNotSaved_ReturnsFalse()
+    {
+        var manager = CreateManager();
+
+        bool removed = manager.RemoveSavedRecipe(10);
+
+        Assert.False(removed);
+    }
 }
