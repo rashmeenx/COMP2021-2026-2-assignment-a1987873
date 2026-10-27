@@ -163,5 +163,18 @@ public sealed class RecipeManagerPartBTests
             results[1].Id);
     }
 
+    [Fact]
+    public void HighestProteinRecipes_IgnoreMissingNutrition()
+    {
+        var manager = CreateManager();
+
+        IReadOnlyList<Recipe> results =
+            manager.GetHighestProteinRecipes(10);
+
+        Assert.DoesNotContain(
+            results,
+            recipe => recipe.Id == 40);
+    }
+
 
 }
