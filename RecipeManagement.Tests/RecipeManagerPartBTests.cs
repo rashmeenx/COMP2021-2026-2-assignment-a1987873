@@ -122,4 +122,26 @@ public sealed class RecipeManagerPartBTests
             results,
             recipe => recipe.Id == 20);
     }
+    
+    [Fact]
+    public void SearchByIngredient_ReturnsRecipeOnlyOnce()
+    {
+        var manager = CreateManager();
+
+        IReadOnlyList<Recipe> results =
+            manager.SearchByIngredient("tomato");
+
+        int pastaCount = 0;
+
+        foreach (Recipe recipe in results)
+        {
+            if (recipe.Id == 10)
+            {
+                pastaCount++;
+            }
+        }
+
+        Assert.Equal(1, pastaCount);
+    }
+
 }
