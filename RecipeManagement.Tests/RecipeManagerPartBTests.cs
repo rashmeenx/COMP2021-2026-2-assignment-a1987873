@@ -202,4 +202,19 @@ public sealed class RecipeManagerPartBTests
             10,
             manager.GetSavedRecipes());
     }
+
+    [Fact]
+    public void SavedRecipe_DuplicateIsRejected()
+    {
+        var manager = CreateManager();
+
+        Assert.True(
+            manager.AddSavedRecipe(10));
+
+        Assert.False(
+            manager.AddSavedRecipe(10));
+
+        Assert.Single(
+            manager.GetSavedRecipes());
+    }
 }
