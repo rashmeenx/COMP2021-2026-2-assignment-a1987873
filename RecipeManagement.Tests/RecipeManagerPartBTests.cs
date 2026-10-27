@@ -122,7 +122,7 @@ public sealed class RecipeManagerPartBTests
             results,
             recipe => recipe.Id == 20);
     }
-    
+
     [Fact]
     public void SearchByIngredient_ReturnsRecipeOnlyOnce()
     {
@@ -143,5 +143,25 @@ public sealed class RecipeManagerPartBTests
 
         Assert.Equal(1, pastaCount);
     }
+
+    [Fact]
+    public void HighestProteinRecipes_AreReturnedInDescendingOrder()
+    {
+        var manager = CreateManager();
+
+        IReadOnlyList<Recipe> results =
+            manager.GetHighestProteinRecipes(2);
+
+        Assert.Equal(2, results.Count);
+
+        Assert.Equal(
+            30,
+            results[0].Id);
+
+        Assert.Equal(
+            10,
+            results[1].Id);
+    }
+
 
 }
