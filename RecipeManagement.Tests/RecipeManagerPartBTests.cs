@@ -176,6 +176,7 @@ public sealed class RecipeManagerPartBTests
             recipe => recipe.Id == 40);
     }
 
+    [Fact]
     public void HighestProteinRecipes_ReturnsEmptyForZeroOrNegativeCount()
     {
         var manager = CreateManager();
