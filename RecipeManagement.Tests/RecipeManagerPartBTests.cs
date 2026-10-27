@@ -103,4 +103,23 @@ public sealed class RecipeManagerPartBTests
         Assert.Equal(10, results[0].Id);
         Assert.Equal("Creamy Pasta", results[0].Title);
     }
+
+    [Fact]
+    public void SearchByIngredient_FindsMatchesIgnoringCase()
+    {
+        var manager = CreateManager();
+
+        IReadOnlyList<Recipe> results =
+            manager.SearchByIngredient("toMaTo");
+
+        Assert.Equal(2, results.Count);
+
+        Assert.Contains(
+            results,
+            recipe => recipe.Id == 10);
+
+        Assert.Contains(
+            results,
+            recipe => recipe.Id == 20);
+    }
 }
