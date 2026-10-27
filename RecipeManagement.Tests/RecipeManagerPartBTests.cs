@@ -188,5 +188,18 @@ public sealed class RecipeManagerPartBTests
             manager.GetHighestProteinRecipes(-1));
     }
 
+    [Fact]
+    public void SavedRecipe_CanBeAddedAndChecked()
+    {
+        var manager = CreateManager();
 
+        bool added = manager.AddSavedRecipe(10);
+
+        Assert.True(added);
+        Assert.True(manager.IsRecipeSaved(10));
+
+        Assert.Contains(
+            10,
+            manager.GetSavedRecipes());
+    }
 }
