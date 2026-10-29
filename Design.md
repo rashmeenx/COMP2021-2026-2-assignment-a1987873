@@ -29,5 +29,5 @@ The Part B features extend the existing Part A RecipeManager without replacing i
 | Lookup recipe by ID | Dictionary | Average O(1) | Hash-based key lookup. |
 | Traverse cooking plan | LinkedList | O(n) | Each planned recipe may need to be visited. |
 | Complete next instruction | Queue | O(1) | The item at the front is removed. |
-| LINQ title/ingredient search | Recipe collection | O(n) | Each recipe may need to be inspected. 
-| Check whether a recipe is saved | HashSet<int> | Average O(1) | HashSet.Contains uses hash-based membership lookup and prevent duplication.|
+| LINQ title/ingredient search | Recipe collection | O(n) | Each recipe may need to be inspected. |
+| Check whether a recipe is saved | HashSet<int> | Average O(1) | HashSet.Contains uses hash-based membership lookup to check whether the ID exists and prevent duplication.|

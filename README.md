@@ -1,8 +1,11 @@
 # Recipe Management System — Student Starter
 
-Starter repository for Parts A and B. Implement `RecipeManager` in Core; the Application menu and JSON loader are supplied.
+Recipe management application developed for COMP2021 Software Development Practice.
 
-## What is supplied
+The project contains the Part A recipe-management features and the Part B extensions for LINQ searching, protein checking and saved recipes.
+
+## Project Structure
+### Supplied
 
 - `RecipeManagement.Core/Models/` — recipe model classes
 - `RecipeManagement.Core/RecipeLoader.cs` — reads `data/recipes.json`
@@ -11,9 +14,9 @@ Starter repository for Parts A and B. Implement `RecipeManager` in Core; the App
 - `RecipeManagement.Tests/` — example tests
 - `data/recipes.json` — recipe dataset
 
-## What you implement
-
-**Part A** — `RecipeManager.cs` using:
+## What I implemented
+**Part A**
+The Part A implementation uses the following C# collections in `RecipeManager.cs`:
 
 - `Dictionary<int, Recipe>`
 - `List<string>`
@@ -21,11 +24,20 @@ Starter repository for Parts A and B. Implement `RecipeManager` in Core; the App
 - `Stack<int>`
 - `Queue<string>`
 
-**Part B** — LINQ searches, protein report, saved-recipe collection, `Design.md`, and more tests.
+**Part B** 
+Part B extends the existing RecipeManager with:
+
+- case-insensitive partial recipe title search using LINQ
+- case-insensitive ingredient search using LINQ
+- a highest-protein recipe report using LINQ
+- saved/favourite recipes using HashSet<int>
+- additional xUnit tests for the new Part B behaviour
+- Design.md explaining the design choice
+
 
 ## Build and run
 
-Open `StudentPackage/RecipeManagement.sln`:
+Open `RecipeManagement.sln`:
 
 ```bash
 dotnet build
@@ -42,5 +54,3 @@ I did not use generative AI in the preparation of this assignment.
 # COMP2021-2026-2-assignment-a1987873
 #### .gitignore file reference: https://gist.github.com/kmorcinek/2710267#file-gitignore
 
-	
-	If the same recipe is stored under two different IDs, .Where() can return it twice. But, since there is unique IDs for each recipes in the dictionary, the same recipes will return once. We could use .Distinct() but did not use it as each recipe is stored only once in the dictionary. .Distinct() is used to remove duplicates.
